@@ -4,6 +4,9 @@ import { ApexOptions } from "apexcharts";
 import dynamic from "next/dynamic";
 import Image from 'next/image';
 import Link from 'next/link';
+
+import { Progress } from 'flowbite-react';
+
 const ReactApexChart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 interface ChartThreeState {
@@ -51,8 +54,9 @@ const CardDataStats: React.FC<CardDataStatsProps> = ({
     series: [65, 35],
   });
   return (
-    <div className="rounded-sm border border-stroke bg-white p-4 shadow-default dark:border-strokedark dark:bg-boxdark">
-      <div className='flex justify-between pb-1'>
+    <div className="rounded-sm border border-stroke bg-white px-4 pb-4 shadow-default dark:border-strokedark dark:bg-boxdark">
+      <Progress progress={27} color='green' labelProgress size={'lg'} className='-mt-2 text-bodydark1' />
+      <div className='flex justify-between pb-1 mt-4'>
         <div className='flex space-x-2'>
           <div className="flex h-11.5 w-11.5 items-center justify-center rounded-full bg-meta-2 dark:bg-meta-4">
             {children}
@@ -65,14 +69,9 @@ const CardDataStats: React.FC<CardDataStatsProps> = ({
             <p className='text-xs uppercase bg-bodydark1 dark:bg-graydark rounded-md p-0.5 mt-0.5 dark:text-bodydark1'>Single fill</p>
           </div>
         </div>
-        <div className='-mr-4 -mt-2'>
-          <ReactApexChart
-            options={options}
-            series={state.series}
-            type="donut"
-            height={80}
-            width={80}
-          />
+        <div className=''>
+          <p className='text-meta-3'>Filled</p>
+          <p><span className='text-meta-3'>1.6K</span>/3.456K</p>
         </div>
       </div>
       <hr />
@@ -109,7 +108,7 @@ const CardDataStats: React.FC<CardDataStatsProps> = ({
         <div>
           <Link
             href="#"
-            className="inline-flex items-center justify-center rounded-md bg-black py-2 px-6 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10"
+            className="inline-flex items-center justify-center rounded-md bg-bodydark2 dark:bg-boxdark-2 py-2 px-6 text-center font-medium text-white hover:bg-opacity-60 hover:dark:bg-opacity-60 lg:px-8 xl:px-10"
           >
             {action}
           </Link>

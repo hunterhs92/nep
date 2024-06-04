@@ -1,28 +1,61 @@
 "use client";
 import React from "react";
-import ChartOne from "../Charts/ChartOne";
-import ChartThree from "../Charts/ChartThree";
-import ChartTwo from "../Charts/ChartTwo";
-import ChatCard from "../Chat/ChatCard";
-import TableOne from "../Tables/TableOne";
 import CardDataStats from "../CardDataStats";
 import Image from "next/image";
-// import Map from "../Maps/TestMap";
+import Link from "next/link";
 
-// without this the component renders on server and throws an error
-import dynamic from "next/dynamic";
-const MapOne = dynamic(() => import("../Maps/MapOne"), {
-  ssr: false,
-});
+import { Tooltip, Dropdown } from 'flowbite-react';
 
-const ECommerce: React.FC = () => {
+import { ShoppingCartIcon, CurrencyDollarIcon, CheckBadgeIcon, XCircleIcon, PlusIcon } from '@heroicons/react/24/outline'
+
+const PreMarkets: React.FC = () => {
   return (
     <>
+      <div className="flex justify-between">
+        <div className="inline-flex rounded-md shadow-sm" role="group">
+          <button type="button" className="inline-flex items-center px-4 py-2 text-sm font-medium text-body bg-white border border-bodydark2 rounded-s-lg hover:bg-meta-5 hover:text-white dark:bg-black dark:border-bodydark2 dark:text-bodydark1 dark:hover:text-white dark:hover:bg-meta-5">
+            <ShoppingCartIcon className="h-6 w-6 pr-1" />
+            Buy
+          </button>
+          <button type="button" className="inline-flex items-center px-4 py-2 text-sm font-medium text-body bg-white border-t border-b border-bodydark2 hover:bg-meta-5 hover:text-white dark:bg-black dark:border-bodydark2 dark:text-bodydark1 dark:hover:text-white dark:hover:bg-meta-5">
+            <CurrencyDollarIcon className="h-6 w-6 pr-1" />
+            Sell
+          </button>
+          <button type="button" className="inline-flex items-center px-4 py-2 text-sm font-medium text-body bg-white border-t border-b border-l border-bodydark2 hover:bg-meta-5 hover:text-white dark:bg-black dark:border-bodydark2 dark:text-bodydark1 dark:hover:text-white dark:hover:bg-meta-5">
+            <CheckBadgeIcon className="h-6 w-6 pr-1 text-success" />
+            Completed
+          </button>
+          <button type="button" className="inline-flex items-center px-4 py-2 text-sm font-medium text-body bg-white border border-bodydark2 rounded-e-lg hover:bg-meta-5 hover:text-white dark:bg-black dark:border-bodydark2 dark:text-bodydark1 dark:hover:text-white dark:hover:bg-meta-5">
+            <XCircleIcon className="h-6 w-6 pr-1 text-danger" />
+            Closed
+          </button>
+        </div>
+        <div>
+          <Dropdown label="" dismissOnClick={false} renderTrigger={() =>
+            <button type="button" className="inline-flex items-center px-2.5 py-2 text-sm font-bold text-white rounded-lg bg-success hover:bg-opacity-70">
+              <Tooltip content="New Offer" placement="left">
+                <PlusIcon className="h-6 w-6 font-bold" />
+              </Tooltip>
+            </button>}>
+            <Dropdown.Item>
+              <Link href="/pre-markets/new-offer/buy">
+                <p className="flex"><ShoppingCartIcon className="h-6 w-6 pr-1 text-meta-3" /> <span className="mt-0.5">BUY</span></p>
+              </Link>
+            </Dropdown.Item>
+            <Dropdown.Item>
+              <Link href="/pre-markets/new-offer/sell">
+                <p className="flex"><CurrencyDollarIcon className="h-6 w-6 pr-1 text-meta-1" /> <span className="mt-0.5">SELL</span></p>
+              </Link>
+            </Dropdown.Item>
+          </Dropdown>
 
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5">
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5 mt-6">
         <CardDataStats action="Buy" total="$3.456K" token="SUI" price={0.859}>
           <div>
-          <Image src={'/images/logo/chain/sui.svg'} width={20} height={20} alt='chain-logo' />
+            <Image src={'/images/logo/chain/sui.svg'} width={20} height={20} alt='chain-logo' />
           </div>
         </CardDataStats>
         <CardDataStats action="Sell" total="$45,2K" token="JUP" price={1.2}>
@@ -95,4 +128,4 @@ const ECommerce: React.FC = () => {
   );
 };
 
-export default ECommerce;
+export default PreMarkets;
